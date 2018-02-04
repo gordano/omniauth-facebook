@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'omniauth/facebook/version'
+require 'omniauth/zalo/version'
 
 Gem::Specification.new do |s|
-  s.name     = 'omniauth-facebook'
-  s.version  = OmniAuth::Facebook::VERSION
+  s.name     = 'omniauth-zalo'
+  s.version  = OmniAuth::Zalo::VERSION
   s.authors  = ['Mark Dodwell', 'Josef Šimánek']
   s.email    = ['mark@madeofcode.com', 'retro@ballgag.cz']
   s.summary  = 'Facebook OAuth2 Strategy for OmniAuth'

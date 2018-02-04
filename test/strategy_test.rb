@@ -1,5 +1,5 @@
 require 'helper'
-require 'omniauth-facebook'
+require 'omniauth-zalo'
 require 'openssl'
 require 'base64'
 
