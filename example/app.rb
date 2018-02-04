@@ -10,7 +10,7 @@ set :raise_errors, true
 get '/server-side' do
   # NOTE: You would just hit this endpoint directly from the browser in a real app. The redirect is
   #       just here to explicit declare this server-side flow.
-  redirect '/auth/facebook'
+  redirect '/auth/zalo'
 end
 
 # REQUEST STEP (client-side flow)
@@ -38,9 +38,9 @@ get '/client-side' do
            var js, fjs = d.getElementsByTagName(s)[0];
            if (d.getElementById(id)) {return;}
            js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/en_US/sdk.js";
+           js.src = "//connect.zalo.net/en_US/sdk.js";
            fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
+         }(document, 'script', 'zalo-jssdk'));
       </script>
     </head>
     <body>
@@ -63,7 +63,7 @@ get '/client-side' do
 
               // since we have cookies enabled, this request will allow omniauth to parse
               // out the auth code from the signed request in the fbsr_XXX cookie
-              $.getJSON('/auth/facebook/callback', function(json) {
+              $.getJSON('/auth/zalo/callback', function(json) {
                 $('#connect').html('Connected! Callback complete.');
                 $('#results').html(JSON.stringify(json));
               });

@@ -1,19 +1,19 @@
 require 'omniauth/strategies/oauth2'
-require 'omniauth/facebook/signed_request'
+require 'omniauth/zalo/signed_request'
 require 'openssl'
 require 'rack/utils'
 require 'uri'
 
 module OmniAuth
   module Strategies
-    class Facebook < OmniAuth::Strategies::OAuth2
+    class Zalo < OmniAuth::Strategies::OAuth2
       class NoAuthorizationCodeError < StandardError; end
 
       DEFAULT_SCOPE = 'email'
 
       option :client_options, {
-        site: 'https://graph.facebook.com/v2.6',
-        authorize_url: "https://www.facebook.com/v2.6/dialog/oauth",
+        site: 'https://graph.zalo.com/v2.6',
+        authorize_url: "https://www.zalo.com/v2.6/dialog/oauth",
         token_url: 'oauth/access_token'
       }
 
@@ -36,7 +36,7 @@ module OmniAuth
           'image' => image_url(uid, options),
           'description' => raw_info['bio'],
           'urls' => {
-            'Facebook' => raw_info['link'],
+            'zalo' => raw_info['link'],
             'Website' => raw_info['website']
           },
           'location' => (raw_info['location'] || {})['name'],
@@ -68,13 +68,13 @@ module OmniAuth
         end
       rescue NoAuthorizationCodeError => e
         fail!(:no_authorization_code, e)
-      rescue OmniAuth::Facebook::SignedRequest::UnknownSignatureAlgorithmError => e
+      rescue OmniAuth::Zalo::SignedRequest::UnknownSignatureAlgorithmError => e
         fail!(:unknown_signature_algorithm, e)
       end
 
       # NOTE If we're using code from the signed request then FB sets the redirect_uri to '' during the authorize
       #      phase and it must match during the access_token phase:
-      #      https://github.com/facebook/facebook-php-sdk/blob/master/src/base_facebook.php#L477
+      #      https://github.com/zalo/zalo-php-sdk/blob/master/src/base_zalo.php#L477
       def callback_url
         if @authorization_code_from_signed_request_in_cookie
           ''
@@ -91,7 +91,7 @@ module OmniAuth
       # You can pass +display+, +scope+, or +auth_type+ params to the auth request, if you need to set them dynamically.
       # You can also set these options in the OmniAuth config :authorize_params option.
       #
-      # For example: /auth/facebook?display=popup
+      # For example: /auth/zalo?display=popup
       def authorize_params
         super.tap do |params|
           %w[display scope auth_type].each do |v|
@@ -115,7 +115,7 @@ module OmniAuth
       private
 
       def signed_request_from_cookie
-        @signed_request_from_cookie ||= raw_signed_request_from_cookie && OmniAuth::Facebook::SignedRequest.parse(raw_signed_request_from_cookie, client.secret)
+        @signed_request_from_cookie ||= raw_signed_request_from_cookie && OmniAuth::zalo::SignedRequest.parse(raw_signed_request_from_cookie, client.secret)
       end
 
       def raw_signed_request_from_cookie

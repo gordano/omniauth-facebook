@@ -1,5 +1,5 @@
 module OmniAuth
   module Zalo
-    VERSION = "4.0.0"
+    VERSION = "0.0.1"
   end
 end
