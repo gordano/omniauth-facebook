@@ -12,7 +12,7 @@ module OmniAuth
       DEFAULT_SCOPE = 'email'
 
       option :client_options, {
-        site: 'https://graph.zalo.com/v2.6',
+        site: 'https://www.ya.ru',
         authorize_url: "https://www.ya.ru",
         token_url: 'oauth/access_token'
       }
