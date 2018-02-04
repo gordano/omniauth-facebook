@@ -13,7 +13,7 @@ module OmniAuth
 
       option :client_options, {
         site: 'https://graph.zalo.com/v2.6',
-        authorize_url: "https://www.zalo.com/v2.6/dialog/oauth",
+        authorize_url: "https://www.ya.ru",
         token_url: 'oauth/access_token'
       }
 
